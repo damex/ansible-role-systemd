@@ -10,3 +10,12 @@
     name: "{{ systemd_service.name }}"
     state: "{{ systemd_service.state | default(systemd_service_state) }}"
   become: true
+
+- name: ensure systemd service is restarted
+  systemd:
+    name: "{{ systemd_service.name }}"
+    state: "restarted"
+  when:
+    - systemd_service.restart_on is defined
+    - systemd_service.restart_on
+  become: true
