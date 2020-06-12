@@ -1,0 +1,9 @@
+---
+- name: ensure systemd
+  block:
+    - include_tasks: systemd_service.yml
+      loop: "{{ systemd_services }}"
+      loop_control:
+        loop_var: "systemd_service"
+  tags:
+    - systemd

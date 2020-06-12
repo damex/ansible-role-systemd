@@ -1,0 +1,12 @@
+---
+- name: ensure systemd service is enabled
+  systemd:
+    name: "{{ systemd_service.name }}"
+    enabled: "{{ systemd_service.enabled | default(systemd_service_enabled) }}"
+  become: true
+
+- name: ensure systemd service is started
+  systemd:
+    name: "{{ systemd_service.name }}"
+    state: "{{ systemd_service.state | default(systemd_service_state) }}"
+  become: true
